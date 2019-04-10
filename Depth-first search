@@ -1,0 +1,24 @@
+n, r = map(int, input().split())
+V = {}
+Visited = [False] * (n + 1)
+start, ncomp = 1, 0
+
+for i in range (1, n+1):
+    V[i]=[]
+
+for i in range(r):
+    a, b = map(int, input().split())
+    V[a] += [b]
+    V[b] += [a]
+
+def DFS(start):
+    Visited[start] = True
+    for v in V[start]:
+        if not Visited[v]:
+            DFS(v)
+
+for i in range(1, n + 1): 
+    if not Visited[i]:
+        ncomp += 1
+        DFS(i)
+print(ncomp)
